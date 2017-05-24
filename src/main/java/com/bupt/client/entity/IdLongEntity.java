@@ -15,14 +15,12 @@ import javax.persistence.MappedSuperclass;
  */
 // JPA 基类的标识
 @MappedSuperclass
-public abstract class IdLongEntity implements Serializable
-{
-    /** 描述 */
+public abstract class IdLongEntity implements Serializable {
+	
     private static final long serialVersionUID = 8430941165882152228L;
     
-    // 当主键ID类型为Long并使用Oracle数据库时使用序列存储主键值
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
     
     public Long getId()

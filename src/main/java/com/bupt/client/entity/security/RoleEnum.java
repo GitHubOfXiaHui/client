@@ -1,10 +1,9 @@
-package com.bupt.client.entity;
+package com.bupt.client.entity.security;
 
 public enum RoleEnum {
 
 	ADMIN((byte)1, "admin", "管理员"),
-	NORMAL((byte)2, "normal", "普通用户"),
-	GUEST((byte)4, "guest", "访客");
+	NORMAL((byte)2, "normal", "普通用户");
 	
 	private byte code;
 	private String role;

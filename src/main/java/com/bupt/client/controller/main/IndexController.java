@@ -1,9 +1,10 @@
-package com.bupt.client.controller;
+package com.bupt.client.controller.main;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/main")
 public class IndexController {
 
 	@RequestMapping({"/", "/index"})
@@ -11,5 +12,5 @@ public class IndexController {
 		return INDEX;
 	}
 	
-	private static final String INDEX = "index";
+	private static final String INDEX = "main/index";
 }

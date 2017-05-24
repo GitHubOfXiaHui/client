@@ -27,7 +27,7 @@
   <img src="${contextPath}/static/styles/dwz/themes/newcard/images/login/loginbg.jpg" alt="" class="imgWrap" />
   <div class="wrapper">
      <div class="wrap">
-     <form method="post" action="${contextPath}/login" id="formID" >
+     <form method="post" action="${contextPath}/main/login" id="formID" >
        <div class="loginWrap">
          <div class="loginForm">
            <p><input type="text" name="username" class="text" maxlength="15" placeholder="用户名"/></p>

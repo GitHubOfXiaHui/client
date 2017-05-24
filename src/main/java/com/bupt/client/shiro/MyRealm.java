@@ -10,8 +10,8 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
-import com.bupt.client.entity.User;
-import com.bupt.client.service.UserService;
+import com.bupt.client.entity.security.User;
+import com.bupt.client.service.security.UserService;
 
 public class MyRealm extends AuthorizingRealm {
 
