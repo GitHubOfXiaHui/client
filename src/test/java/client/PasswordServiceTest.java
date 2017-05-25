@@ -7,7 +7,7 @@ public class PasswordServiceTest {
 
 	public static void main(String[] args) {
 		PasswordService passwordService = new DefaultPasswordService();
-		System.out.println(passwordService.encryptPassword("admin"));
+		System.out.println(passwordService.encryptPassword("123456"));
 	}
 
 }

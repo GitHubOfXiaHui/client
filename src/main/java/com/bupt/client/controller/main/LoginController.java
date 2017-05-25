@@ -1,5 +1,7 @@
 package com.bupt.client.controller.main;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -11,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bupt.client.entity.security.User;
 import com.bupt.client.service.security.UserService;
@@ -29,7 +30,7 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(User user, RedirectAttributes model) {
+	public String login(User user, HttpSession session) {
 		// 登录认证
 		Subject subject = SecurityUtils.getSubject();
 		AuthenticationToken token = new UsernamePasswordToken(user.getUsername(), user.getPassword());
@@ -37,7 +38,7 @@ public class LoginController {
 		
 		// 登录成功
 		User dbUser = userService.findUser(user.getUsername());
-		model.addFlashAttribute("currentUser", dbUser);
+		session.setAttribute("currentUser", dbUser);
 		return "redirect:/main/index";
 	}
 

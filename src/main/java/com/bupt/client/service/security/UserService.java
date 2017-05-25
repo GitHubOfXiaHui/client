@@ -50,4 +50,11 @@ public interface UserService {
 	 * @param ids
 	 */
 	void deleteUsers(Long[] ids);
+
+	/**
+	 * 修改密码
+	 * @param username
+	 * @param newPassword 
+	 */
+	void changePassword(String username, String newPassword);
 }

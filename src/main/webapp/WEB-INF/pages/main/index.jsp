@@ -83,6 +83,7 @@ $(function(){
            		<span class="tima">
 		    		<div>
 					    <span>
+					    	<span style="color: white; font-size: 10pt;">欢迎，${currentUser.realname}</span>
 			               	<a href="${contextPath}/security/user/changePassword" target="dialog" mask="true" width="500" height="200" class="topLink02">修改密码</a>
 			               	<a href="${contextPath}/main/logout" class="topLink04">退出</a>
 			            </span>

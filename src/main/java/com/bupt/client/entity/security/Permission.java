@@ -2,7 +2,6 @@ package com.bupt.client.entity.security;
 
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
@@ -24,7 +23,7 @@ public class Permission extends IdLongEntity {
 	@Column(nullable = false, unique = true)
 	private byte code;
 
-	@ManyToMany(mappedBy = "permissions", cascade = CascadeType.ALL)
+	@ManyToMany(mappedBy = "permissions")
 	private Set<Role> roles;
 
 	public String getPermission() {

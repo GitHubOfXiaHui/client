@@ -2,7 +2,6 @@ package com.bupt.client.entity.security;
 
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -26,10 +25,10 @@ public class Role extends IdLongEntity {
 	@Column(nullable = false, unique = true)
 	private byte code;
 
-	@ManyToMany(mappedBy = "roles", cascade = CascadeType.ALL)
+	@ManyToMany(mappedBy = "roles")
 	private Set<User> users;
 
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany
 	@JoinTable(name = "sec_role_permission", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "permission_id"))
 	private Set<Permission> permissions;
 

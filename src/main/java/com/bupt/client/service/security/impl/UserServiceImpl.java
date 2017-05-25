@@ -87,4 +87,11 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
+	@Transactional
+	@Override
+	public void changePassword(String username, String newPassword) {
+		User user = userDao.findByUsername(username);
+		user.setPassword(passwordService.encryptPassword(newPassword));
+	}
+
 }
