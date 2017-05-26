@@ -13,8 +13,17 @@
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.web.bind.annotation.ControllerAdvice" />
 	</context:component-scan>
-	
+
 	<!-- 属性占位符配置器 -->
 	<context:property-placeholder location="classpath:dataSource.properties" />
+
+	<!-- 相当于调用Security.addProvider(SunJCE) -->
+	<bean
+		class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="staticMethod" value="java.security.Security.addProvider" />
+		<property name="arguments">
+			<bean class="com.sun.crypto.provider.SunJCE" />
+		</property>
+	</bean>
 
 </beans>
