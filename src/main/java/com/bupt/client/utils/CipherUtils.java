@@ -49,6 +49,17 @@ public class CipherUtils implements CipherConstants {
 		this.tableCipher = Cipher.getInstance(TABLE_ALGORITH_NAME);
 	}
 
+	public String encryptPostKey(String str) throws InvalidKeyException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException {
+		return encrypt(str, POST_KEY);
+	}
+
+	private String encrypt(String str, String key) throws InvalidKeyException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException {
+		// 解密表密钥
+		Key tableKey = getTableKey(key);
+		tableCipher.init(Cipher.ENCRYPT_MODE, tableKey);
+		return Base64.encodeBase64String(tableCipher.doFinal(str.getBytes()));
+	}
+
 	public EncryptedPost encrypt(Post post) throws JsonProcessingException, InvalidKeyException,
 			NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException {
 		EncryptedPost encryptedPost = new EncryptedPost();
@@ -58,8 +69,7 @@ public class CipherUtils implements CipherConstants {
 
 	public Post decrypt(EncryptedPost encryptedPost) throws InvalidKeyException, NoSuchAlgorithmException,
 			IllegalBlockSizeException, BadPaddingException, JsonParseException, JsonMappingException, IOException {
-		Post post = (Post) decrypt(Post.class, encryptedPost, POST_KEY);
-		return post;
+		return (Post) decrypt(Post.class, encryptedPost, POST_KEY);
 	}
 
 	private void encrypt(EncryptedObject secret, PlainObject plain, String key) throws JsonProcessingException,
@@ -90,7 +100,7 @@ public class CipherUtils implements CipherConstants {
 		PlainObject plain = mapper.readValue(json, plainClazz);
 		// 设置id
 		plain.setId(secret.getId());
-		
+
 		return plain;
 	}
 

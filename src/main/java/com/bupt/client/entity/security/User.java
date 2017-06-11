@@ -11,6 +11,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Type;
 
 import com.bupt.client.entity.IdLongEntity;
 
@@ -29,6 +30,10 @@ public class User extends IdLongEntity {
 
 	@Column(nullable = false)
 	private String password;
+	
+	@Type(type = "yes_no")
+	@Column
+	private boolean supervisor = false;
 
 	@ManyToMany
 	@JoinTable(name = "sec_user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -56,6 +61,14 @@ public class User extends IdLongEntity {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public boolean isSupervisor() {
+		return supervisor;
+	}
+
+	public void setSupervisor(boolean supervisor) {
+		this.supervisor = supervisor;
 	}
 
 	public Set<Role> getRoles() {

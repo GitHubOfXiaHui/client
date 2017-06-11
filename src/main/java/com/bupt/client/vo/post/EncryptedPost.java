@@ -1,6 +1,7 @@
 package com.bupt.client.vo.post;
 
 import com.bupt.client.vo.EncryptedObject;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class EncryptedPost implements EncryptedObject {
 
