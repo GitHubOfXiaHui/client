@@ -21,9 +21,10 @@ import javax.crypto.NoSuchPaddingException;
 
 import org.apache.commons.codec.binary.Base64;
 
+import com.bupt.client.utils.CipherConstants;
 import com.sun.crypto.provider.SunJCE;
 
-public class CipherTest {
+public class CipherTest implements CipherConstants {
 
 	public static void main(String[] args) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, FileNotFoundException, IOException {
 		Security.addProvider(new SunJCE());
@@ -50,18 +51,13 @@ public class CipherTest {
 		}
 		Properties tableSecretKeys = new Properties();
 		try (OutputStream os = new FileOutputStream(TABLE_SECRET_KEYS)) {
-			tableSecretKeys.put("post.key", wrappedPostKey);
+			tableSecretKeys.put(POST_KEY, wrappedPostKey);
 			tableSecretKeys.store(os, "表密钥");
 		}
 		
 		System.out.println("SUCCESS!");
 	}
 
-	private static final String MAIN_ALGORITH_NAME = "RSA";
 	private static final int KEY_SIZE = 1024;
-	private static final String TABLE_ALGORITH_NAME = "AES";
-	private static final String MAIN_PUBLIC_KEY = "MainPublic.key";
-	private static final String MAIN_PRIVATE_KEY = "MainPrivate.key";
-	private static final String TABLE_SECRET_KEYS = "TableSecretKeys.properties";
 
 }

@@ -49,25 +49,27 @@ public class CipherUtils implements CipherConstants {
 		this.tableCipher = Cipher.getInstance(TABLE_ALGORITH_NAME);
 	}
 
-	public String encryptPostKey(String str) throws InvalidKeyException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException {
+	public String encryptPostKeyword(String str)
+			throws InvalidKeyException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException {
 		return encrypt(str, POST_KEY);
 	}
 
-	private String encrypt(String str, String key) throws InvalidKeyException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException {
+	private String encrypt(String str, String key)
+			throws InvalidKeyException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException {
 		// 解密表密钥
 		Key tableKey = getTableKey(key);
 		tableCipher.init(Cipher.ENCRYPT_MODE, tableKey);
 		return Base64.encodeBase64String(tableCipher.doFinal(str.getBytes()));
 	}
 
-	public EncryptedPost encrypt(Post post) throws JsonProcessingException, InvalidKeyException,
+	public EncryptedPost encryptPost(Post post) throws JsonProcessingException, InvalidKeyException,
 			NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException {
 		EncryptedPost encryptedPost = new EncryptedPost();
 		encrypt(encryptedPost, post, POST_KEY);
 		return encryptedPost;
 	}
 
-	public Post decrypt(EncryptedPost encryptedPost) throws InvalidKeyException, NoSuchAlgorithmException,
+	public Post decryptPost(EncryptedPost encryptedPost) throws InvalidKeyException, NoSuchAlgorithmException,
 			IllegalBlockSizeException, BadPaddingException, JsonParseException, JsonMappingException, IOException {
 		return (Post) decrypt(Post.class, encryptedPost, POST_KEY);
 	}
@@ -104,11 +106,18 @@ public class CipherUtils implements CipherConstants {
 		return plain;
 	}
 
+	/**
+	 * 解密表密钥
+	 * 
+	 * @param key
+	 * @return
+	 * @throws InvalidKeyException
+	 * @throws NoSuchAlgorithmException
+	 */
 	private Key getTableKey(String key) throws InvalidKeyException, NoSuchAlgorithmException {
 		mainCipher.init(Cipher.UNWRAP_MODE, mainPrivateKey);
-		Key tableKey = mainCipher.unwrap(Base64.decodeBase64(tableSecretKeys.getProperty(key)), TABLE_ALGORITH_NAME,
+		return mainCipher.unwrap(Base64.decodeBase64(tableSecretKeys.getProperty(key)), TABLE_ALGORITH_NAME,
 				Cipher.SECRET_KEY);
-		return tableKey;
 	}
 
 	public static void main(String[] args)
@@ -125,9 +134,9 @@ public class CipherUtils implements CipherConstants {
 		calendar.set(2017, 4, 26, 0, 55, 32);
 		post.setCreateTime(calendar.getTimeInMillis());
 
-		EncryptedPost encryptedPost = cipher.encrypt(post);
+		EncryptedPost encryptedPost = cipher.encryptPost(post);
 		System.out.println(encryptedPost);
-		System.out.println(cipher.decrypt(encryptedPost));
+		System.out.println(cipher.decryptPost(encryptedPost));
 	}
 
 }

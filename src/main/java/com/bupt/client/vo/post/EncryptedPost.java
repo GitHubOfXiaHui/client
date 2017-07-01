@@ -1,12 +1,14 @@
 package com.bupt.client.vo.post;
 
 import com.bupt.client.vo.EncryptedObject;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 public class EncryptedPost implements EncryptedObject {
 
 	private static final long serialVersionUID = -4980784300120097832L;
 	
+	@JsonInclude(Include.NON_NULL)
 	private Long id;
 	
 	private String data;

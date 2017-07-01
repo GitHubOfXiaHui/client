@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import com.bupt.client.service.post.PostCipherService;
 import com.bupt.client.utils.CipherUtils;
+import com.bupt.client.vo.Keyword;
 import com.bupt.client.vo.post.EncryptedPostReqVo;
 import com.bupt.client.vo.post.Post;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -31,12 +32,13 @@ public class PostCipherServiceImpl implements PostCipherService {
 	public EncryptedPostReqVo encrypt(Post post) throws InvalidKeyException, JsonProcessingException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException {
 		EncryptedPostReqVo encryptedPostReqVo = new EncryptedPostReqVo();
 		// 加密后的帖子
-		encryptedPostReqVo.setEncryptedPost(cipherUtils.encrypt(post));
+		encryptedPostReqVo.setEncryptedPost(cipherUtils.encryptPost(post));
 		// 加密后帖子关键词
 		List<Word> words = WordSegmenter.seg(post.getTitle() + " " + post.getContent(), SegmentationAlgorithm.MaxNgramScore);
-		Set<String> keywords = new HashSet<>();
+		Set<Keyword> keywords = new HashSet<>();
 		for (Word word : words) {
-			keywords.add(cipherUtils.encryptPostKey(word.getText()));
+			Keyword keyword = new Keyword(cipherUtils.encryptPostKeyword(word.getText()), word.getFrequency() * word.getWeight());
+			keywords.add(keyword);
 		}
 		encryptedPostReqVo.setKeywords(keywords);
 		return encryptedPostReqVo;

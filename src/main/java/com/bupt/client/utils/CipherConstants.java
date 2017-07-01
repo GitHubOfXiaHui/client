@@ -7,5 +7,6 @@ public interface CipherConstants {
 	String MAIN_PUBLIC_KEY = "MainPublic.key";
 	String MAIN_PRIVATE_KEY = "MainPrivate.key";
 	String TABLE_SECRET_KEYS = "TableSecretKeys.properties";
-	String POST_KEY = "post.key";
+	
+	String POST_KEY = "key.post";
 }

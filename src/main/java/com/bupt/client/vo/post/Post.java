@@ -4,10 +4,12 @@ import java.util.Date;
 
 import com.bupt.client.vo.PlainObject;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 public class Post implements PlainObject {
 
-	@JsonIgnore
+	@JsonInclude(Include.NON_NULL)
 	private Long id;
 	
 	private String title;

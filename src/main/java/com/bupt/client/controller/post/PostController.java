@@ -2,11 +2,13 @@ package com.bupt.client.controller.post;
 
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Properties;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +30,10 @@ public class PostController {
 	@Autowired
 	private PostCipherService postCipherService;
 	
+	@Autowired
+	@Qualifier("RESTful")
+	private Properties restful;
+	
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create() {
 		return CREATE;
@@ -37,7 +43,7 @@ public class PostController {
 	public @ResponseBody String create(Post post) throws InvalidKeyException, JsonProcessingException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException {
 		EncryptedPostReqVo encryptedPostReqVo = postCipherService.encrypt(post);
 		RestTemplate rest = new RestTemplate();
-		rest.postForObject(CREATE_URL, encryptedPostReqVo, EncryptedPost.class);
+		rest.postForObject(restful.getProperty("url.create"), encryptedPostReqVo, EncryptedPost.class);
 		return AjaxObject.newOk("发帖成功。").toString();
 	}
 
@@ -48,6 +54,5 @@ public class PostController {
 	}
 	
 	private static final String CREATE = "post/create";
-	private static final String CREATE_URL = "http://localhost:8080/hiservice/post/create";
 	private static final String LIST = "post/list";
 }
