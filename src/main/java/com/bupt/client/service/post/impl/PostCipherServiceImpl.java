@@ -37,7 +37,7 @@ public class PostCipherServiceImpl implements PostCipherService {
 		List<Word> words = WordSegmenter.seg(post.getTitle() + " " + post.getContent(), SegmentationAlgorithm.MaxNgramScore);
 		Set<Keyword> keywords = new HashSet<>();
 		for (Word word : words) {
-			Keyword keyword = new Keyword(cipherUtils.encryptPostKeyword(word.getText()), word.getFrequency() * word.getWeight());
+			Keyword keyword = new Keyword(cipherUtils.encryptPostKeyword(word.getText()), 0.0f/* word.getFrequency() * word.getWeight() */);
 			keywords.add(keyword);
 		}
 		encryptedPostReqVo.setKeywords(keywords);
