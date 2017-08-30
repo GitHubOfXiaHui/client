@@ -38,13 +38,14 @@ public class PostServiceImpl implements PostService {
 	@Override
 	public PostCreateResDTO createPost(Post post) throws Exception {
 		// TODO Auto-generated method stub
+		PostCreateReqDTO request;
 		try {
-			PostCreateReqDTO request = buildPostCreateReqDTO(post);
-			return rest.postForObject(restful.getProperty("url.create"), request, PostCreateResDTO.class);
+			request = buildPostCreateReqDTO(post);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			return BaseResponseDTO.buildResponse(ResponseEnum.ERROR_10, PostCreateReqDTO.class);
 		}
+		return rest.postForObject(restful.getProperty("url.create"), request, PostCreateResDTO.class);
 	}
 
 	private PostCreateReqDTO buildPostCreateReqDTO(Post post) throws Exception {

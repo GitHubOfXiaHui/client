@@ -18,7 +18,7 @@ import com.bupt.client.entity.security.User;
 import com.bupt.client.exception.MessageException;
 import com.bupt.client.service.security.UserService;
 import com.bupt.client.utils.AjaxObject;
-import com.bupt.client.utils.DWZPage;
+import com.bupt.clientsdk.dto.page.DWZPage;
 
 @Controller
 @RequestMapping("/security/user")

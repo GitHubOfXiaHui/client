@@ -17,8 +17,8 @@ import com.bupt.client.entity.security.Role;
 import com.bupt.client.entity.security.RoleEnum;
 import com.bupt.client.entity.security.User;
 import com.bupt.client.service.security.UserService;
-import com.bupt.client.utils.DWZPage;
-import com.bupt.client.utils.PageUtils;
+import com.bupt.clientsdk.dto.page.DWZPage;
+import com.bupt.clientsdk.dto.page.PageUtils;
 
 @Service("userService")
 @Transactional(readOnly = true)

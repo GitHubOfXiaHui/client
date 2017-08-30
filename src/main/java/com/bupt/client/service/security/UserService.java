@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.bupt.client.entity.security.User;
-import com.bupt.client.utils.DWZPage;
+import com.bupt.clientsdk.dto.page.DWZPage;
 
 public interface UserService {
 	
