@@ -1,5 +1,5 @@
 <%@ tag language="java" pageEncoding="UTF-8" body-content="scriptless"  trimDirectiveWhitespaces="true"%>
-<%@ attribute name="page" type="com.bupt.client.utils.DWZPage" required="true"%>
+<%@ attribute name="page" type="com.bupt.clientsdk.dto.page.DWZPage" required="true"%>
 <%@ attribute name="action" type="java.lang.String" required="true"%>
 <%@ attribute name="onsubmit" type="java.lang.String"%>
 

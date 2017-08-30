@@ -27,11 +27,13 @@ public class PostController {
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public @ResponseBody String create(Post post) throws Exception {
 		PostCreateResDTO response = postService.createPost(post);
+		AjaxObject result;
 		if (response.isSuccess()) {
-			return AjaxObject.newOk("发帖成功：" + response.getMsg()).toString();
+			result = AjaxObject.newOk("发帖成功：" + response.getMsg());
 		} else {
-			return AjaxObject.newError("发帖失败：" + response.getMsg()).toString();
+			result =  AjaxObject.newError("发帖失败：" + response.getMsg());
 		}
+		return result.setCallbackType("").toString();
 	}
 
 	@RequestMapping("/list")

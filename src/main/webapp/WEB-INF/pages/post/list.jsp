@@ -55,7 +55,7 @@
 				<td>${post.title}</td>
 				<td>${post.content}</td>
 				<td>${post.author}</td>
-				<td><fmt:formatDate value="${post.descriptionCreateTime}" pattern="yyyy-MM-dd EEEE" /></td>
+				<td><fmt:formatDate value="${post.createDate}" pattern="yyyy-MM-dd EEEE" /></td>
 			</tr>
 			</c:forEach>
 		</tbody>

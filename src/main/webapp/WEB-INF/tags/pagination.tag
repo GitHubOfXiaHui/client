@@ -1,5 +1,5 @@
 <%@ tag language="java" pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
-<%@ attribute name="page" type="com.bupt.client.utils.DWZPage" required="true"%>
+<%@ attribute name="page" type="com.bupt.clientsdk.dto.page.DWZPage" required="true"%>
 <%@ attribute name="pageNumShown" type="java.lang.Integer"%>
 <%@ attribute name="begin" type="java.lang.Integer"%>
 <%@ attribute name="end" type="java.lang.Integer"%>
