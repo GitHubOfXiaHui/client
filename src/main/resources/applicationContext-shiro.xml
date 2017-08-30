@@ -52,6 +52,7 @@
 		<property name="unauthorizedUrl" value="/main/login" />
 		<property name="filterChainDefinitions">
 			<value>
+				/alive = anon
 				/static/** = anon
 				/main/login = anon
 				/main/logout = logout

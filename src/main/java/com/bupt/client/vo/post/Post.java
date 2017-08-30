@@ -2,15 +2,10 @@ package com.bupt.client.vo.post;
 
 import java.util.Date;
 
-import com.bupt.client.vo.PlainObject;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.bupt.client.cipher.EncryptIgnore;
+import com.bupt.client.cipher.Encryptable;
 
-public class Post implements PlainObject {
-
-	@JsonInclude(Include.NON_NULL)
-	private Long id;
+public class Post implements Encryptable {
 	
 	private String title;
 	
@@ -20,17 +15,9 @@ public class Post implements PlainObject {
 	
 	private long createTime = System.currentTimeMillis();
 	
-	@JsonIgnore
-	public Date getDescriptionCreateTime() {
+	@EncryptIgnore
+	public Date getCreateDate() {
 		return new Date(createTime);
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getTitle() {
@@ -67,8 +54,8 @@ public class Post implements PlainObject {
 
 	@Override
 	public String toString() {
-		return "Post [id=" + id + ", title=" + title + ", content=" + content + ", author=" + author + ", createTime="
-				+ getDescriptionCreateTime() + "]";
+		return "Post [title=" + title + ", content=" + content + ", author=" + author + ", createTime="
+				+ getCreateDate() + "]";
 	}
 	
 }

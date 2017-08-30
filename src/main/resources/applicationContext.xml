@@ -28,7 +28,11 @@
 			<bean class="com.sun.crypto.provider.SunJCE" />
 		</property>
 	</bean>
-	
+
+	<bean class="org.springframework.web.client.RestTemplate" />
+
 	<util:properties id="RESTful" location="classpath:RESTful.properties" />
+	<util:properties id="tableSecretKeys"
+		location="classpath:TableSecretKeys.properties" />
 
 </beans>

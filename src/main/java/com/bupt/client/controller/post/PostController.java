@@ -1,38 +1,23 @@
 package com.bupt.client.controller.post;
 
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.util.Properties;
-
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.client.RestTemplate;
 
-import com.bupt.client.service.post.PostCipherService;
+import com.bupt.client.service.post.PostService;
 import com.bupt.client.utils.AjaxObject;
-import com.bupt.client.vo.post.EncryptedPost;
-import com.bupt.client.vo.post.EncryptedPostReqVo;
 import com.bupt.client.vo.post.Post;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.bupt.clientsdk.dto.post.PostCreateResDTO;
 
 @Controller
 @RequestMapping("/post")
 public class PostController {
 	
 	@Autowired
-	private PostCipherService postCipherService;
-	
-	@Autowired
-	@Qualifier("RESTful")
-	private Properties restful;
+	private PostService postService;
 	
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create() {
@@ -40,11 +25,13 @@ public class PostController {
 	}
 	
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public @ResponseBody String create(Post post) throws InvalidKeyException, JsonProcessingException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException {
-		EncryptedPostReqVo encryptedPostReqVo = postCipherService.encrypt(post);
-		RestTemplate rest = new RestTemplate();
-		rest.postForObject(restful.getProperty("url.create"), encryptedPostReqVo, EncryptedPost.class);
-		return AjaxObject.newOk("发帖成功。").toString();
+	public @ResponseBody String create(Post post) throws Exception {
+		PostCreateResDTO response = postService.createPost(post);
+		if (response.isSuccess()) {
+			return AjaxObject.newOk("发帖成功：" + response.getMsg()).toString();
+		} else {
+			return AjaxObject.newError("发帖失败：" + response.getMsg()).toString();
+		}
 	}
 
 	@RequestMapping("/list")
