@@ -43,7 +43,7 @@ public class PostServiceImpl implements PostService {
 			return rest.postForObject(restful.getProperty("url.create"), request, PostCreateResDTO.class);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			return BaseResponseDTO.buildResponse(ResponseEnum.FAIL, PostCreateReqDTO.class);
+			return BaseResponseDTO.buildResponse(ResponseEnum.ERROR_10, PostCreateReqDTO.class);
 		}
 	}
 
