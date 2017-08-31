@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <keta:paginationForm action="${contextPath }/post/list" page="${page}" onsubmit="return navTabSearch(this);">
-	<input type="hidden" name="content" value="${content}"/>
+	<input type="hidden" name="keyword" value="${keyword}"/>
 </keta:paginationForm>
 
 <form method="post" action="${contextPath }/post/list" onsubmit="return navTabSearch(this);">
@@ -9,8 +9,8 @@
 		<div class="searchBar">
 			<ul class="searchContent">
 				<li>
-					<label>包含：</label>
-					<input type="text" name="content" value="${content}"/>
+					<label>关键词：</label>
+					<input type="text" name="keyword" value="${keyword}"/>
 				</li>
 			</ul>
 			<div class="subBar">
@@ -51,7 +51,7 @@
 		<tbody>
 			<c:forEach var="post" items="${posts}" varStatus="i">
 			<tr target="slt_uid" rel="${post.id}">
-				<td>${i.index + 1}</td>
+				<td>${i.count}</td>
 				<td>${post.title}</td>
 				<td>${post.content}</td>
 				<td>${post.author}</td>

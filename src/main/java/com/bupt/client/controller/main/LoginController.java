@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.bupt.client.constants.Constants;
 import com.bupt.client.entity.security.User;
 import com.bupt.client.service.security.UserService;
 
@@ -38,7 +39,7 @@ public class LoginController {
 		
 		// 登录成功
 		User dbUser = userService.findUser(user.getUsername());
-		session.setAttribute("currentUser", dbUser);
+		session.setAttribute(Constants.CURRENT_USER, dbUser);
 		return "redirect:/main/index";
 	}
 

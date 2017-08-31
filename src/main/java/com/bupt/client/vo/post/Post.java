@@ -2,10 +2,13 @@ package com.bupt.client.vo.post;
 
 import java.util.Date;
 
-import com.bupt.client.cipher.EncryptIgnore;
 import com.bupt.client.cipher.Encryptable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Post implements Encryptable {
+	
+	@JsonIgnore
+	private Long id;
 	
 	private String title;
 	
@@ -15,9 +18,17 @@ public class Post implements Encryptable {
 	
 	private long createTime = System.currentTimeMillis();
 	
-	@EncryptIgnore
+	@JsonIgnore
 	public Date getCreateDate() {
 		return new Date(createTime);
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getTitle() {
