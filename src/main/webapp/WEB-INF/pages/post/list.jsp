@@ -27,10 +27,10 @@
 	<div class="panelBar">
 		<ul class="toolBar">
 			<shiro:hasPermission name="post:create">
-				<li><a class="add" target="dialog" mask="true" width="400" height="300" href="${contextPath}/post/create"><span>发帖</span></a></li>
+				<li><a class="add" target="dialog" mask="true" width="500" height="300" href="${contextPath}/post/create"><span>发帖</span></a></li>
 			</shiro:hasPermission>
 			<shiro:hasPermission name="post:update">
-				<li><a class="edit" target="dialog" mask="true" width="500" height="400" href="${contextPath}/post/update/{slt_uid}"><span>编辑</span></a></li>
+				<li><a class="edit" target="dialog" mask="true" width="500" height="300" href="${contextPath}/post/update/{slt_uid}"><span>编辑</span></a></li>
 			</shiro:hasPermission>
 			<shiro:hasPermission name="post:delete">
 				<li><a class="delete" target="ajaxTodo" href="${contextPath}/post/delete/{slt_uid}" title="确认要删除选定的帖子?"><span>删除</span></a></li>
