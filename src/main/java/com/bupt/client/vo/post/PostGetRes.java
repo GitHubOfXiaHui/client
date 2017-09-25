@@ -6,7 +6,6 @@ public class PostGetRes {
 
 	public PostGetRes() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public PostGetRes(Post post) {

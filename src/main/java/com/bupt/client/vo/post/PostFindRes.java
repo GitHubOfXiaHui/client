@@ -12,7 +12,6 @@ public class PostFindRes {
 
 	public PostFindRes() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public PostFindRes(List<Post> posts, DWZPage page) {

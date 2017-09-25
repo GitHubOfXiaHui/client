@@ -64,7 +64,6 @@ public class CipherUtils {
 	}
 
 	private Key getSessionKey(KeyEnum key) throws Exception {
-		// TODO Auto-generated method stub
 		PrivateKey mainKey = getMainKey();
 		mainCipher.init(Cipher.UNWRAP_MODE, mainKey);
 		return mainCipher.unwrap(Base64.decodeBase64(tableSecretKeys.getProperty(key.getValue())), AES,

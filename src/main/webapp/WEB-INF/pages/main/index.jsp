@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=7" />
-<title>海思云</title>
+<title>SaaS平台</title>
 
 <link href="${contextPath}/static/styles/dwz/themes/newcard/style.css" rel="stylesheet" type="text/css" media="screen"/>
 <link href="${contextPath}/static/styles/dwz/themes/css/core.css" rel="stylesheet" type="text/css" media="screen"/>

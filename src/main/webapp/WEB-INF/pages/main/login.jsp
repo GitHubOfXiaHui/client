@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>接入服务平台</title>
+<title>登录</title>
 <link href="${contextPath}/static/styles/dwz/themes/css/login.css" rel="stylesheet" type="text/css" media="screen"/>
 
 <style>
