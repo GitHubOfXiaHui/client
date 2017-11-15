@@ -2,12 +2,14 @@ package com.bupt.client.cipher;
 
 import java.io.ObjectInputStream;
 import java.security.Key;
+import java.security.MessageDigest;
 import java.security.PrivateKey;
 import java.util.Properties;
 
 import javax.crypto.Cipher;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.binary.Hex;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.io.ClassPathResource;
@@ -42,14 +44,14 @@ public class CipherUtils {
 		return Base64.encodeBase64String(sessionCipher.doFinal(json));
 	}
 
-	public String encrypt(String text, KeyEnum key) throws Exception {
-		// 解密会话密钥
-		Key sessionKey = getSessionKey(key);
-
-		// 加密
-		sessionCipher.init(Cipher.ENCRYPT_MODE, sessionKey);
-		return Base64.encodeBase64String(sessionCipher.doFinal(text.getBytes()));
-	}
+//	public String encrypt(String text, KeyEnum key) throws Exception {
+//		// 解密会话密钥
+//		Key sessionKey = getSessionKey(key);
+//
+//		// 加密
+//		sessionCipher.init(Cipher.ENCRYPT_MODE, sessionKey);
+//		return Base64.encodeBase64String(sessionCipher.doFinal(text.getBytes()));
+//	}
 
 	public <T> T decrypt(Class<T> clazz, String secret, KeyEnum key) throws Exception {
 		// 解密表密钥
@@ -61,6 +63,12 @@ public class CipherUtils {
 		
 		// 反序列化JSON字节数组
 		return new ObjectMapper().readValue(json, clazz);
+	}
+	
+	public String digest(String plain) throws Exception {
+		MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+		byte[] hash = messageDigest.digest(plain.getBytes("UTF-8"));
+		return Hex.encodeHexString(hash);
 	}
 
 	private Key getSessionKey(KeyEnum key) throws Exception {

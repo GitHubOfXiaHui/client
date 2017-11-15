@@ -63,15 +63,15 @@ public class PostServiceImpl implements PostService {
 		// 加密
 		String text = cipher.encrypt(post, KeyEnum.POST);
 		// 分词
-		Set<KeywordDTO> keywords = seg(post, KeyEnum.POST);
+		Set<KeywordDTO> keywords = seg(post);
 		return new PostCreateReqDTO(new PostDTO(text), keywords);
 	}
 
-	private Set<KeywordDTO> seg(Post post, KeyEnum key) throws Exception {
+	private Set<KeywordDTO> seg(Post post) throws Exception {
 		List<Word> words = SegmenterUtils.seg(post.getTitle(), post.getContent());
 		Set<KeywordDTO> keywords = new HashSet<>();
 		for (Word word : words) {
-			String keyword = cipher.encrypt(word.getText(), KeyEnum.POST);
+			String keyword = cipher.digest(word.getText());
 			keywords.add(new KeywordDTO(keyword));
 		}
 		return keywords;
@@ -81,7 +81,7 @@ public class PostServiceImpl implements PostService {
 	public PostFindRes findPosts(String keyword, DWZPage page) {
 		PostFindReqDTO request;
 		try {
-			request = new PostFindReqDTO(seg(keyword, KeyEnum.POST), page);
+			request = new PostFindReqDTO(seg(keyword), page);
 		} catch (Exception e) {
 			return new PostFindRes(new ArrayList<>(), page);
 		}
@@ -115,11 +115,11 @@ public class PostServiceImpl implements PostService {
 		return post;
 	}
 
-	private Set<String> seg(String keyword, KeyEnum key) throws Exception {
+	private Set<String> seg(String keyword) throws Exception {
 		List<Word> words = SegmenterUtils.seg(keyword);
 		Set<String> keywords = new HashSet<>();
 		for (Word word : words) {
-			keywords.add(cipher.encrypt(word.getText(), KeyEnum.POST));
+			keywords.add(cipher.digest(word.getText()));
 		}
 		return keywords;
 	}
