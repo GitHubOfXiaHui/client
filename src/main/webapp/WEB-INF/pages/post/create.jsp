@@ -9,7 +9,7 @@
 		</p>
 		<p>
 			<label>内容：</label>
-			<textarea class="validate[required,maxSize[255]] required" name="content" cols="32" rows="10" maxlength="255"></textarea>
+			<textarea class="validate[required,maxSize[255]] required" name="content" cols="36" rows="10" maxlength="255"></textarea>
 		</p>
 	</div>
 			
