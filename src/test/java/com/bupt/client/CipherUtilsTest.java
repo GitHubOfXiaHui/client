@@ -19,29 +19,24 @@ public class CipherUtilsTest {
 	private CipherUtils cipher;
 
 	//@Test
-	public void postTest() throws Exception {
-		Post post = new Post();
-		post.setTitle("whatever");
-		post.setContent("say something.");
-		String secret = cipher.encrypt(post, KeyEnum.POST);
-		Post post2 = cipher.decrypt(Post.class, secret, KeyEnum.POST);
-		System.out.println("Post: " + post);
-		System.out.println("Post2: " + post2);
-	}
-	
-	//@Test
 	public void digestTest() throws Exception {
-		String str = "波风更夜";
+		String str = "第五期";
 		System.out.println("*******" + cipher.digest(str) + "*******");
 	}
 	
-	@Test
+	//@Test
 	public void encryptTest() throws Exception {
 		Post post = new Post();
-		post.setTitle("个人信息");
-		post.setContent("用户名：夏辉，昵称：波风更夜。");
+		post.setContent("第五期后勤服务座谈会");
 		String secret = cipher.encrypt(post, KeyEnum.POST);
 		System.out.println("*******" + secret + "*******");
+	}
+	
+	@Test
+	public void decryptTest() throws Exception {
+		String str = "Ubnrh68QFmhYLLDV9qtw9h9RqpdmLmW10k/BLzd81ny/thr9AC9X0E1ZRtp3wf77CvrS4zUAboQh3VSvbHSy/dpqokcu+NzGjIWR31M4Ove3R9hIU+rYk3ey3SnFVKOveq8+mi2w9tcO1HurK5Pc8A==";
+		Post post = cipher.decrypt(Post.class, str, KeyEnum.POST);
+		System.out.println("*******" + post.getContent() + "*******");
 	}
 
 }
