@@ -9,6 +9,13 @@ import com.bupt.clientsdk.dto.page.DWZPage;
 public interface UserService {
 	
 	/**
+	 * 根据id查找用户
+	 * @param id
+	 * @return
+	 */
+	User findUser(Long id);
+	
+	/**
 	 * 根据用户名查找用户
 	 * @param username
 	 * @return
@@ -40,16 +47,15 @@ public interface UserService {
 	/**
 	 * 保存用户
 	 * @param user
-	 * @param isAdmin 
 	 * @return
 	 */
-	User createUser(User user, boolean isAdmin);
+	User createUser(User user);
 
 	/**
 	 * 删除用户
 	 * @param ids
 	 */
-	void deleteUsers(Long[] ids);
+	boolean deleteUser(Long id);
 
 	/**
 	 * 修改密码
@@ -57,4 +63,11 @@ public interface UserService {
 	 * @param newPassword 
 	 */
 	void changePassword(String username, String newPassword);
+
+	/**
+	 * 设置角色
+	 * @param id
+	 * @param roles
+	 */
+	void updateUser(Long id, Byte[] roles);
 }

@@ -29,8 +29,11 @@
 			<shiro:hasPermission name="user:create">
 				<li><a class="add" target="dialog" mask="true" width="400" height="300" href="${contextPath}/security/user/create"><span>新建用户</span></a></li>
 			</shiro:hasPermission>
+			<shiro:hasPermission name="privileges:update">
+				<li><a class="edit" target="dialog" mask="true" width="400" height="300" href="${contextPath}/security/user/update/{slt_uid}"><span>设置角色</span></a></li>
+			</shiro:hasPermission>
 			<shiro:hasPermission name="user:delete">
-				<li><a class="delete" target="selectedTodo" rel="ids" href="${contextPath}/security/user/delete" title="确认要删除选定的用户信息?"><span>删除用户</span></a></li>
+				<li><a class="delete" target="ajaxTodo" href="${contextPath}/security/user/delete/{slt_uid}" title="确认要删除选定的用户?"><span>删除用户</span></a></li>
 			</shiro:hasPermission>
 		</ul>
 	</div>
@@ -38,17 +41,19 @@
 	<table class="table" layoutH="137" width="100%">
 		<thead>
 			<tr>
-				<th width="22"><input type="checkbox" group="ids" class="checkboxCtrl"></th>
+				<th width="22">#</th>
+				<th width="70">超级管理员</th>
 				<th>用户名</th>
-				<th>真名</th>
+				<th>昵称</th>
 				<th>角色</th>
 				<th>权限</th>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="user" items="${users}">
+			<c:forEach var="user" items="${users}" varStatus="i">
 			<tr target="slt_uid" rel="${user.id}">
-				<td><input name="ids" value="${user.id}" type="checkbox"></td>
+				<td>${i.count}</td>
+				<td al><c:if test="${user.supervisor}">★</c:if></td>
 				<td>${user.username}</td>
 				<td>${user.realname}</td>
 				<td>

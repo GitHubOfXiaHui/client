@@ -8,7 +8,7 @@
 			<input type="text" class="validate[required,maxSize[10]] required" name="username" size="20"/>
 		</p>
 		<p>
-			<label>真名：</label>
+			<label>昵称：</label>
 			<input type="text" class="validate[required,maxSize[10]] required" name="realname" size="20"/>
 		</p>
 		<p>
@@ -21,7 +21,7 @@
 		</p>
 		<p>
 			<label>&nbsp;</label>
-			<input type="checkbox" name="isAdmin" value="true">是否为管理员
+			<input type="checkbox" name="supervisor" value="true" />是否为超级管理员
 		</p>
 	</div>
 			

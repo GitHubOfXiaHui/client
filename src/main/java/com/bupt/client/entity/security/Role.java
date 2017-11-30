@@ -24,6 +24,12 @@ public class Role extends IdLongEntity {
 	/** 角色标识符 */
 	@Column(nullable = false, unique = true)
 	private byte code;
+	
+	@Column
+	private String name;
+	
+	@Column
+	private String value;
 
 	@ManyToMany(mappedBy = "roles")
 	private Set<User> users;
@@ -48,6 +54,22 @@ public class Role extends IdLongEntity {
 		this.code = code;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+
 	public Set<User> getUsers() {
 		return users;
 	}
@@ -65,14 +87,30 @@ public class Role extends IdLongEntity {
 	}
 
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + code;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Role other = (Role) obj;
+		if (code != other.code)
+			return false;
+		return true;
+	}
+
+	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder("Role{code = " + code + ", role = " + getRole() + ", description = "
-				+ getDescription() + ", permissions = [");
-		for (Permission permission : permissions) {
-			sb.append(permission.getDescription() + ", ");
-		}
-		sb.append("]}");
-		return sb.toString();
+		return "Role [code=" + code + ", name=" + name + ", value=" + value + ", permissions=" + permissions + "]";
 	}
 
 }

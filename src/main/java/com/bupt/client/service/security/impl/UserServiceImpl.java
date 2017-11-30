@@ -32,6 +32,11 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private PasswordService passwordService;
+	
+	@Override
+	public User findUser(Long id) {
+		return userDao.findOne(id);
+	}
 
 	@Override
 	public User findUser(String username) {
@@ -68,22 +73,23 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User createUser(User user, boolean isAdmin) {
+	public User createUser(User user) {
 		user.setPassword(passwordService.encryptPassword(user.getPassword()));
 		Set<Role> roles = new HashSet<>();
-		roles.add(roleDao.findByCode(RoleEnum.NORMAL.getCode()));
-		if (isAdmin) {
-			roles.add(roleDao.findByCode(RoleEnum.ADMIN.getCode()));
-		}
+		roles.add(roleDao.findByCode(RoleEnum.VISITOR.getCode()));
 		user.setRoles(roles);
 		return userDao.save(user);
 	}
 
 	@Transactional
 	@Override
-	public void deleteUsers(Long[] ids) {
-		for (Long id : ids) {
-			userDao.delete(id);
+	public boolean deleteUser(Long id) {
+		User user = userDao.findOne(id);
+		if (user.isSupervisor()) {
+			return false;
+		} else {
+			userDao.delete(user);
+			return true;
 		}
 	}
 
@@ -94,4 +100,15 @@ public class UserServiceImpl implements UserService {
 		user.setPassword(passwordService.encryptPassword(newPassword));
 	}
 
+	@Transactional
+	@Override
+	public void updateUser(Long id, Byte[] roles) {
+		User user = userDao.findOne(id);
+		Set<Role> rs = new HashSet<>();
+		for (Byte role : roles) {
+			rs.add(roleDao.findByCode(role));
+		}
+		user.setRoles(rs);
+		userDao.save(user);
+	}
 }

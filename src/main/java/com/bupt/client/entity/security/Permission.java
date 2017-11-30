@@ -22,6 +22,12 @@ public class Permission extends IdLongEntity {
 	/** 权限标识符 */
 	@Column(nullable = false, unique = true)
 	private byte code;
+	
+	@Column
+	private String name;
+	
+	@Column
+	private String value;
 
 	@ManyToMany(mappedBy = "permissions")
 	private Set<Role> roles;
@@ -42,6 +48,22 @@ public class Permission extends IdLongEntity {
 		this.code = code;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+
 	public Set<Role> getRoles() {
 		return roles;
 	}
@@ -52,8 +74,7 @@ public class Permission extends IdLongEntity {
 
 	@Override
 	public String toString() {
-		return "Permission{code = " + code + ", permission = " + getPermission() + ", description = " + getDescription()
-				+ "}";
+		return "Permission [code=" + code + ", name=" + name + ", value=" + value + "]";
 	}
 
 }

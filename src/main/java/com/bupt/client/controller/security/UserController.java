@@ -9,13 +9,16 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bupt.client.entity.security.Role;
 import com.bupt.client.entity.security.User;
 import com.bupt.client.exception.MessageException;
+import com.bupt.client.service.security.RoleService;
 import com.bupt.client.service.security.UserService;
 import com.bupt.client.utils.AjaxObject;
 import com.bupt.clientsdk.dto.page.DWZPage;
@@ -26,6 +29,9 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private RoleService roleService;
 
 	@Autowired
 	private PasswordService passwordService;
@@ -38,18 +44,21 @@ public class UserController {
 
 	@RequiresPermissions("user:create")
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public @ResponseBody String create(User user, String confirm, boolean isAdmin) {
+	public @ResponseBody String create(User user, String confirm) {
 		validateCreateUser(user, confirm);
 		// 验证通过，创建用户
-		userService.createUser(user, isAdmin);
+		userService.createUser(user);
 		return AjaxObject.newOk("新建用户成功。").toString();
 	}
 
 	@RequiresPermissions("user:delete")
-	@RequestMapping("/delete")
-	public @ResponseBody String delete(Long[] ids) {
-		userService.deleteUsers(ids);
-		return AjaxObject.newOk("删除用户成功。").setCallbackType("").toString();
+	@RequestMapping("/delete/{id}")
+	public @ResponseBody String delete(@PathVariable("id") Long id) {
+		if (userService.deleteUser(id)) {
+			return AjaxObject.newOk("删除用户成功。").setCallbackType("").toString();
+		} else {
+			return AjaxObject.newOk("删除用户失败。").setCallbackType("").toString();
+		}
 	}
 
 	@RequiresPermissions("user:changePassword")
@@ -78,6 +87,26 @@ public class UserController {
 		model.addAttribute("username", username);
 		model.addAttribute("page", page);
 		return LIST;
+	}
+	
+	@RequiresPermissions("privileges:update")
+	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
+	public String update(@PathVariable("id") Long id, Model model) {
+		User user = userService.findUser(id);
+		List<Role> allRole = roleService.findAllRoles();
+		
+		model.addAttribute("id", user.getId());
+		model.addAttribute("roles", user.getRoles());
+		model.addAttribute("allRoles", allRole);
+		
+		return UPDATE;
+	}
+	
+	@RequiresPermissions("privileges:update")
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public @ResponseBody String update(Long id, @RequestParam(value = "roles[]", required = false) Byte[] roles) {
+		userService.updateUser(id, roles);
+		return AjaxObject.newOk("设置角色成功。").toString();
 	}
 
 	// 验证能否创建用户
@@ -114,4 +143,5 @@ public class UserController {
 	private static final String CREATE = "security/user/create";
 	private static final String CHANGE_PASSWORD = "security/user/changePassword";
 	private static final String LIST = "security/user/list";
+	private static final String UPDATE = "security/user/update";
 }

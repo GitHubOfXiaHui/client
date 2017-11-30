@@ -12,8 +12,7 @@ public enum PermissionEnum {
 	USER_EDIT((byte)7, "user:changePassword", "修改密码"),
 	USER_VIEW((byte)8, "user:view", "查看用户"),
 	
-	GRANT((byte)9, "privileges:grant", "授予权限"),
-	REVOKE((byte)10, "privileges:revoke", "收回权限");
+	PRIVILEGES_UPDATE((byte)9, "privileges:update", "设置权限");
 	
 	private byte code;
 	private String permission;
