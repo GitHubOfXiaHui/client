@@ -11,8 +11,12 @@ public enum PermissionEnum {
 	USER_DELETE((byte)6, "user:delete", "删除用户"),
 	USER_EDIT((byte)7, "user:changePassword", "修改密码"),
 	USER_VIEW((byte)8, "user:view", "查看用户"),
+	USER_ROLE_UPDATE((byte)9, "user:role:update", "设置角色"),
 	
-	PRIVILEGES_UPDATE((byte)9, "privileges:update", "设置权限");
+	ROLE_CREATE((byte)10, "role:create", "创建角色"),
+	ROLE_DELETE((byte)11, "role:delete", "删除角色"),
+	ROLE_PRIVILEGE_UPDATE((byte)12, "role:privilege:update", "设置角色"),
+	ROLE_VIEW((byte)13, "role:view", "查看角色");
 	
 	private byte code;
 	private String permission;

@@ -29,7 +29,7 @@
 			<shiro:hasPermission name="user:create">
 				<li><a class="add" target="dialog" mask="true" width="400" height="300" href="${contextPath}/security/user/create"><span>新建用户</span></a></li>
 			</shiro:hasPermission>
-			<shiro:hasPermission name="privileges:update">
+			<shiro:hasPermission name="user:role:update">
 				<li><a class="edit" target="dialog" mask="true" width="400" height="300" href="${contextPath}/security/user/update/{slt_uid}"><span>设置角色</span></a></li>
 			</shiro:hasPermission>
 			<shiro:hasPermission name="user:delete">
@@ -53,12 +53,12 @@
 			<c:forEach var="user" items="${users}" varStatus="i">
 			<tr target="slt_uid" rel="${user.id}">
 				<td>${i.count}</td>
-				<td al><c:if test="${user.supervisor}">★</c:if></td>
+				<td><c:if test="${user.supervisor}">★</c:if></td>
 				<td>${user.username}</td>
 				<td>${user.realname}</td>
 				<td>
 				<c:forEach var="role" items="${user.roles}" varStatus="status">
-					${role.description}
+					${role.value}
 					<c:if test="${!status.last}">
 						,&nbsp;
 					</c:if>
@@ -67,7 +67,7 @@
 				<td>
 				<c:forEach var="role" items="${user.roles}" varStatus="i">
 					<c:forEach var="permission" items="${role.permissions}" varStatus="j">
-						${permission.description}
+						${permission.value}
 						<c:if test="${!i.last || !j.last}">
 							,&nbsp;
 						</c:if>

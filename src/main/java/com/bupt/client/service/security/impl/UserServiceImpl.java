@@ -14,7 +14,6 @@ import com.bupt.client.dao.security.RoleDao;
 import com.bupt.client.dao.security.UserDao;
 import com.bupt.client.entity.security.Permission;
 import com.bupt.client.entity.security.Role;
-import com.bupt.client.entity.security.RoleEnum;
 import com.bupt.client.entity.security.User;
 import com.bupt.client.service.security.UserService;
 import com.bupt.clientsdk.dto.page.DWZPage;
@@ -48,7 +47,7 @@ public class UserServiceImpl implements UserService {
 		User user = userDao.findByUsername(username);
 		Set<String> roles = new HashSet<>();
 		for (Role role : user.getRoles()) {
-			roles.add(role.getRole());
+			roles.add(role.getName());
 		}
 		return roles;
 	}
@@ -59,7 +58,7 @@ public class UserServiceImpl implements UserService {
 		Set<String> permissions = new HashSet<>();
 		for (Role role : user.getRoles()) {
 			for (Permission permission : role.getPermissions()) {
-				permissions.add(permission.getPermission());
+				permissions.add(permission.getName());
 			}
 		}
 		return permissions;
@@ -76,7 +75,7 @@ public class UserServiceImpl implements UserService {
 	public User createUser(User user) {
 		user.setPassword(passwordService.encryptPassword(user.getPassword()));
 		Set<Role> roles = new HashSet<>();
-		roles.add(roleDao.findByCode(RoleEnum.VISITOR.getCode()));
+		roles.add(roleDao.findByCode(VISITOR));
 		user.setRoles(roles);
 		return userDao.save(user);
 	}
@@ -111,4 +110,6 @@ public class UserServiceImpl implements UserService {
 		user.setRoles(rs);
 		userDao.save(user);
 	}
+	
+	private static final byte VISITOR = 3;
 }

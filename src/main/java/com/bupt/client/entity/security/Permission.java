@@ -32,14 +32,6 @@ public class Permission extends IdLongEntity {
 	@ManyToMany(mappedBy = "permissions")
 	private Set<Role> roles;
 
-	public String getPermission() {
-		return PermissionEnum.getPermissionEnum(code).getPermission();
-	}
-
-	public String getDescription() {
-		return PermissionEnum.getPermissionEnum(code).getDescription();
-	}
-
 	public byte getCode() {
 		return code;
 	}

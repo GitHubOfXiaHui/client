@@ -29,7 +29,7 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private RoleService roleService;
 
@@ -88,21 +88,21 @@ public class UserController {
 		model.addAttribute("page", page);
 		return LIST;
 	}
-	
-	@RequiresPermissions("privileges:update")
+
+	@RequiresPermissions("user:role:update")
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
 	public String update(@PathVariable("id") Long id, Model model) {
 		User user = userService.findUser(id);
-		List<Role> allRole = roleService.findAllRoles();
-		
+		List<Role> allRoles = roleService.findAllRoles();
+
 		model.addAttribute("id", user.getId());
 		model.addAttribute("roles", user.getRoles());
-		model.addAttribute("allRoles", allRole);
-		
+		model.addAttribute("allRoles", allRoles);
+
 		return UPDATE;
 	}
-	
-	@RequiresPermissions("privileges:update")
+
+	@RequiresPermissions("user:role:update")
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public @ResponseBody String update(Long id, @RequestParam(value = "roles[]", required = false) Byte[] roles) {
 		userService.updateUser(id, roles);

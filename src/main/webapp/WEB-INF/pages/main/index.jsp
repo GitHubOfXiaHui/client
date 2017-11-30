@@ -115,6 +115,7 @@ $(function(){
 				<div class="accordionContent">
 					<ul class="tree treeFolder">
 						<li><a href="${contextPath}/security/user/list" target="navTab" rel="user">用户管理</a></li>
+						<li><a href="${contextPath}/security/role/list" target="navTab" rel="role">角色管理</a></li>
 					</ul>
 				</div>			
 			</div>

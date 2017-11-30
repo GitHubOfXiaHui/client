@@ -81,13 +81,8 @@ public class User extends IdLongEntity {
 
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder(
-				"User{username = " + username + ", password = " + password + ", roles = [");
-		for (Role role : roles) {
-			sb.append(role.getDescription() + ", ");
-		}
-		sb.append("]}");
-		return sb.toString();
+		return "User [username=" + username + ", realname=" + realname + ", password=" + password + ", supervisor="
+				+ supervisor + ", roles=" + roles + "]";
 	}
 
 }
