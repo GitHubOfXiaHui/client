@@ -44,27 +44,18 @@ public class CipherUtils {
 		return Base64.encodeBase64String(sessionCipher.doFinal(json));
 	}
 
-//	public String encrypt(String text, KeyEnum key) throws Exception {
-//		// 解密会话密钥
-//		Key sessionKey = getSessionKey(key);
-//
-//		// 加密
-//		sessionCipher.init(Cipher.ENCRYPT_MODE, sessionKey);
-//		return Base64.encodeBase64String(sessionCipher.doFinal(text.getBytes()));
-//	}
-
 	public <T> T decrypt(Class<T> clazz, String secret, KeyEnum key) throws Exception {
 		// 解密表密钥
 		Key sessionKey = getSessionKey(key);
-		
+
 		// 解密
 		sessionCipher.init(Cipher.DECRYPT_MODE, sessionKey);
 		byte[] json = sessionCipher.doFinal(Base64.decodeBase64(secret));
-		
+
 		// 反序列化JSON字节数组
 		return new ObjectMapper().readValue(json, clazz);
 	}
-	
+
 	public String digest(String plain) throws Exception {
 		MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
 		byte[] hash = messageDigest.digest(plain.getBytes("UTF-8"));
