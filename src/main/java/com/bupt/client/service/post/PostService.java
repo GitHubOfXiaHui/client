@@ -12,7 +12,7 @@ public interface PostService {
 
 	PostCreateResDTO createPost(Post post) throws Exception;
 
-	PostFindRes findPosts(String keyword, DWZPage page);
+	PostFindRes findPosts(String keyword, DWZPage page) throws Exception;
 
 	PostDeleteResDTO deletePost(Long id);
 

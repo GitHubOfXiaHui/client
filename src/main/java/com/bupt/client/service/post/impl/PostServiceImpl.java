@@ -37,17 +37,17 @@ import com.bupt.clientsdk.dto.post.PostUpdateResDTO;
 
 @Service
 public class PostServiceImpl implements PostService {
-	
+
 	@Autowired
 	@Qualifier("RESTful")
 	private Properties restful;
-	
+
 	@Autowired
 	private CipherUtils cipher;
-	
+
 	@Autowired
 	private RestTemplate rest;
-	
+
 	@Override
 	public PostCreateResDTO createPost(Post post) throws Exception {
 		PostCreateReqDTO request;
@@ -76,40 +76,48 @@ public class PostServiceImpl implements PostService {
 		}
 		return keywords;
 	}
-	
+
 	@Override
-	public PostFindRes findPosts(String keyword, DWZPage page) {
+	public PostFindRes findPosts(String keyword, DWZPage page) throws Exception {
 		PostFindReqDTO request;
 		try {
 			request = new PostFindReqDTO(seg(keyword), page);
 		} catch (Exception e) {
-			return new PostFindRes(new ArrayList<>(), page);
+			return BaseResponseDTO.buildResponse(ResponseEnum.ERROR_10, PostFindRes.class);
 		}
-		
-		PostFindResDTO response = rest.postForObject(restful.getProperty("url.post.find"), request, PostFindResDTO.class);
-		
-		List<Post> posts;
-		try {
-			posts = getPosts(response);
-		} catch (Exception e) {
-			return new PostFindRes(new ArrayList<>(), page);
-		}
-		
-		return new PostFindRes(posts, response.getPage());
+
+		PostFindResDTO response = rest.postForObject(restful.getProperty("url.post.find"), request,
+				PostFindResDTO.class);
+		return bulidPostFindRes(response);
 	}
 
-	private List<Post> getPosts(PostFindResDTO response) throws Exception {
+	private PostFindRes bulidPostFindRes(PostFindResDTO response) throws Exception {
+		PostFindRes postFindRes = new PostFindRes();
+		postFindRes.setCode(response.getCode());
+		postFindRes.setMsg(response.getMsg());
+		try {
+			List<Post> posts = getPosts(response.getPosts());
+			postFindRes.setPosts(posts);
+		} catch (Exception e) {
+			return BaseResponseDTO.buildResponse(ResponseEnum.ERROR_13, PostFindRes.class);
+		}
+		return postFindRes;
+	}
+
+	private List<Post> getPosts(List<PostDTO> postDTOs) throws Exception {
 		List<Post> posts = new ArrayList<>();
-		if (response.isSuccess() && response.getPosts() != null) {
-			List<PostDTO> postDTOs = response.getPosts();
+		if (postDTOs != null) {
 			for (PostDTO postDTO : postDTOs) {
 				posts.add(buildPost(postDTO));
 			}
 		}
 		return posts;
 	}
-	
+
 	private Post buildPost(PostDTO postDTO) throws Exception {
+		if (postDTO == null) {
+			return null;
+		}
 		Post post = cipher.decrypt(Post.class, postDTO.getText(), KeyEnum.POST);
 		post.setId(postDTO.getId());
 		return post;
@@ -126,13 +134,28 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public PostDeleteResDTO deletePost(Long id) {
-		return rest.postForObject(restful.getProperty("url.post.delete"), new PostDeleteReqDTO(id), PostDeleteResDTO.class);
+		return rest.postForObject(restful.getProperty("url.post.delete"), new PostDeleteReqDTO(id),
+				PostDeleteResDTO.class);
 	}
 
 	@Override
 	public PostGetRes findPost(Long id) throws Exception {
-		PostGetResDTO response = rest.postForObject(restful.getProperty("url.post.get"), new PostGetReqDTO(id), PostGetResDTO.class);
-		return new PostGetRes(buildPost(response.getPost()));
+		PostGetResDTO response = rest.postForObject(restful.getProperty("url.post.get"), new PostGetReqDTO(id),
+				PostGetResDTO.class);
+		return buildPostGetRes(response);
+	}
+
+	private PostGetRes buildPostGetRes(PostGetResDTO response) throws Exception {
+		PostGetRes postGetRes = new PostGetRes();
+		postGetRes.setCode(response.getCode());
+		postGetRes.setMsg(response.getMsg());
+		try {
+			Post post = buildPost(response.getPost());
+			postGetRes.setPost(post);
+		} catch (Exception e) {
+			return BaseResponseDTO.buildResponse(ResponseEnum.ERROR_13, PostGetRes.class);
+		}
+		return postGetRes;
 	}
 
 	@Override
@@ -150,5 +173,5 @@ public class PostServiceImpl implements PostService {
 		request.setPostCreateReq(create);
 		return rest.postForObject(restful.getProperty("url.post.update"), request, PostUpdateResDTO.class);
 	}
-	
+
 }

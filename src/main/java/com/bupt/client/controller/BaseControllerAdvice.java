@@ -11,14 +11,15 @@ import com.bupt.clientsdk.dto.enumeration.ResponseEnum;
 @ControllerAdvice
 public class BaseControllerAdvice {
 
-	@ExceptionHandler(MessageException.class)
-	public @ResponseBody String handlerMessageException(MessageException e) {
-		return AjaxObject.newError(e.getMessage()).setCallbackType("").toString();
-	}
-
 	@ExceptionHandler(Exception.class)
-	public @ResponseBody String handlerException() {
-		return AjaxObject.newError(ResponseEnum.ERROR_20.getMsg()).setCallbackType("").toString();
+	public @ResponseBody String handlerException(Exception e) {
+		AjaxObject res;
+		if (e instanceof MessageException) {
+			res = AjaxObject.newError(e.getMessage());
+		} else {
+			res = AjaxObject.newError(ResponseEnum.ERROR_20.getMsg());
+		}
+		return res.setCallbackType("").toString();
 	}
 	
 }

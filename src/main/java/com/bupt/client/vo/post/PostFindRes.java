@@ -2,9 +2,12 @@ package com.bupt.client.vo.post;
 
 import java.util.List;
 
+import com.bupt.clientsdk.dto.BaseResponseDTO;
 import com.bupt.clientsdk.dto.page.DWZPage;
 
-public class PostFindRes {
+public class PostFindRes extends BaseResponseDTO {
+
+	private static final long serialVersionUID = -1369711954251367769L;
 
 	private List<Post> posts;
 

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bupt.client.constants.Constants;
 import com.bupt.client.entity.security.User;
+import com.bupt.client.exception.MessageException;
 import com.bupt.client.service.post.PostService;
 import com.bupt.client.utils.AjaxObject;
 import com.bupt.client.vo.post.Post;
@@ -64,7 +65,9 @@ public class PostController {
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
 	public String update(@PathVariable("id") Long id, Model model) throws Exception {
 		PostGetRes response = postService.findPost(id);
-
+		if (!response.isSuccess()) {
+			throw new MessageException(response.getMsg());
+		}
 		model.addAttribute("post", response.getPost());
 		return UPDATE;
 	}
@@ -82,9 +85,11 @@ public class PostController {
 	}
 
 	@RequestMapping("/list")
-	public String list(@RequestParam(defaultValue = "") String keyword, DWZPage page, Model model) {
+	public String list(@RequestParam(defaultValue = "") String keyword, DWZPage page, Model model) throws Exception {
 		PostFindRes response = postService.findPosts(keyword, page);
-
+		if (!response.isSuccess()) {
+			throw new MessageException(response.getMsg());
+		}
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("posts", response.getPosts());
 		model.addAttribute("page", response.getPage());

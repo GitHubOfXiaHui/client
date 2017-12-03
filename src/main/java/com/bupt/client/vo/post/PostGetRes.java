@@ -1,7 +1,11 @@
 package com.bupt.client.vo.post;
 
-public class PostGetRes {
+import com.bupt.clientsdk.dto.BaseResponseDTO;
 
+public class PostGetRes extends BaseResponseDTO {
+
+	private static final long serialVersionUID = 6291106947541035147L;
+	
 	private Post post;
 
 	public PostGetRes() {
