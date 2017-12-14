@@ -95,6 +95,7 @@ public class PostServiceImpl implements PostService {
 		PostFindRes postFindRes = new PostFindRes();
 		postFindRes.setCode(response.getCode());
 		postFindRes.setMsg(response.getMsg());
+		postFindRes.setPage(response.getPage());
 		try {
 			List<Post> posts = getPosts(response.getPosts());
 			postFindRes.setPosts(posts);
