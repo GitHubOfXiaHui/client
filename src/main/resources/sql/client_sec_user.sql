@@ -24,13 +24,22 @@ DROP TABLE IF EXISTS `sec_user`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sec_user` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `password` varchar(255) NOT NULL,
-  `realname` varchar(255) NOT NULL,
-  `username` varchar(255) NOT NULL,
+  `username` varchar(45) NOT NULL,
+  `password` varchar(128) NOT NULL,
+  `nickname` varchar(45) NOT NULL,
+  `department` varchar(45) DEFAULT NULL,
+  `job_title` varchar(45) DEFAULT NULL,
+  `job_number` varchar(45) DEFAULT NULL,
+  `phone` varchar(16) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  `supervisor` char(1) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `last_modified` datetime DEFAULT NULL,
+  `extension` text,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `UK_a2nhq44gkug0veqws2i9uxem9` (`realname`),
-  UNIQUE KEY `UK_5ctbdrlf3eismye20vsdtk8w8` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  UNIQUE KEY `UK_5ctbdrlf3eismye20vsdtk8w8` (`nickname`),
+  UNIQUE KEY `username_UNIQUE` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +48,7 @@ CREATE TABLE `sec_user` (
 
 LOCK TABLES `sec_user` WRITE;
 /*!40000 ALTER TABLE `sec_user` DISABLE KEYS */;
-INSERT INTO `sec_user` VALUES (1,'$shiro1$SHA-256$500000$km5EggKdcoyFVY00ySKkkg==$30o1K5/H2xWbEe9uSvihU7ZOZqzgkzINmj4Uvt41mTs=','管理员','admin');
+INSERT INTO `sec_user` VALUES (9,'admin','$shiro1$SHA-256$500000$ao1mXRUZPcvKTKwWG2O8aw==$o7cH3v173q+vfHZ9Pjf0440xz4MMDjO7fYK80RWlSSg=','管理员','安全部门','主管','A0001','18813168371','admin@our.com','Y',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `sec_user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +61,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-25  9:37:17
+-- Dump completed on 2017-12-14 15:50:13

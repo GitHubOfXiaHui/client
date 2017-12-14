@@ -38,7 +38,7 @@ CREATE TABLE `sec_role_permission` (
 
 LOCK TABLES `sec_role_permission` WRITE;
 /*!40000 ALTER TABLE `sec_role_permission` DISABLE KEYS */;
-INSERT INTO `sec_role_permission` VALUES (2,1),(2,2),(2,3),(2,4),(1,5),(1,6),(2,7),(2,8),(1,9),(1,10);
+INSERT INTO `sec_role_permission` VALUES (2,1),(4,1),(2,2),(5,2),(2,3),(6,3),(2,4),(3,4),(7,4),(1,5),(8,5),(1,6),(9,6),(2,7),(10,7),(2,8),(3,8),(11,8),(1,9),(12,9),(1,10),(13,10),(1,11),(14,11),(1,12),(15,12),(1,13),(3,13),(16,13);
 /*!40000 ALTER TABLE `sec_role_permission` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-25  9:37:18
+-- Dump completed on 2017-12-14 15:50:15

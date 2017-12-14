@@ -25,9 +25,14 @@ DROP TABLE IF EXISTS `sec_role`;
 CREATE TABLE `sec_role` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `code` tinyint(4) NOT NULL,
+  `name` varchar(45) DEFAULT NULL,
+  `value` varchar(45) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `last_modified` datetime DEFAULT NULL,
+  `extension` text,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_ln5t4vpgitajh436mnmf60oxm` (`code`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,7 +41,7 @@ CREATE TABLE `sec_role` (
 
 LOCK TABLES `sec_role` WRITE;
 /*!40000 ALTER TABLE `sec_role` DISABLE KEYS */;
-INSERT INTO `sec_role` VALUES (1,1),(2,2);
+INSERT INTO `sec_role` VALUES (1,1,'admin','管理员',NULL,NULL,NULL),(2,2,'normal','普通用户',NULL,NULL,NULL),(3,3,'visitor','访客',NULL,NULL,NULL),(4,4,'post:create','新建帖子',NULL,NULL,NULL),(5,5,'post:delete','删除帖子',NULL,NULL,NULL),(6,6,'post:update','修改帖子',NULL,NULL,NULL),(7,7,'post:view','查看帖子',NULL,NULL,NULL),(8,8,'user:create','新建用户',NULL,NULL,NULL),(9,9,'user:delete','删除用户',NULL,NULL,NULL),(10,10,'user:changePassword','修改密码',NULL,NULL,NULL),(11,11,'user:view','查看用户',NULL,NULL,NULL),(12,12,'user:role:update','设置角色',NULL,NULL,NULL),(13,13,'role:create','创建角色',NULL,NULL,NULL),(14,14,'role:delete','删除角色',NULL,NULL,NULL),(15,15,'role:privilege:update','设置权限',NULL,NULL,NULL),(16,16,'role:view','查看角色',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `sec_role` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -49,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-25  9:37:17
+-- Dump completed on 2017-12-14 15:50:14

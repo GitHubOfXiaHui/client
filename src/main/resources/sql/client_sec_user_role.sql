@@ -38,7 +38,7 @@ CREATE TABLE `sec_user_role` (
 
 LOCK TABLES `sec_user_role` WRITE;
 /*!40000 ALTER TABLE `sec_user_role` DISABLE KEYS */;
-INSERT INTO `sec_user_role` VALUES (1,1),(1,2);
+INSERT INTO `sec_user_role` VALUES (9,1),(9,2);
 /*!40000 ALTER TABLE `sec_user_role` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-25  9:37:17
+-- Dump completed on 2017-12-14 15:50:14
