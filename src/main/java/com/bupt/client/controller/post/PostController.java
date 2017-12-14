@@ -39,7 +39,7 @@ public class PostController {
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public @ResponseBody String create(Post post, HttpSession session) throws Exception {
 		User user = (User) session.getAttribute(Constants.CURRENT_USER);
-		post.setAuthor(user.getRealname());
+		post.setAuthor(user.getNickname());
 		PostCreateResDTO response = postService.createPost(post);
 		AjaxObject result;
 		if (response.isSuccess()) {
@@ -71,7 +71,7 @@ public class PostController {
 		model.addAttribute("post", response.getPost());
 		return UPDATE;
 	}
-	
+
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public @ResponseBody String update(Post post) throws Exception {
 		PostUpdateResDTO response = postService.updatePost(post);

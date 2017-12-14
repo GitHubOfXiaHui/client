@@ -57,7 +57,7 @@ public class UserController {
 		if (userService.deleteUser(id)) {
 			return AjaxObject.newOk("删除用户成功。").setCallbackType("").toString();
 		} else {
-			return AjaxObject.newOk("删除用户失败。").setCallbackType("").toString();
+			return AjaxObject.newError("该用户是超级管理员，不能删除。").setCallbackType("").toString();
 		}
 	}
 
@@ -87,6 +87,15 @@ public class UserController {
 		model.addAttribute("username", username);
 		model.addAttribute("page", page);
 		return LIST;
+	}
+	
+	@RequiresPermissions("user:view")
+	@RequestMapping("/view/{id}")
+	public String view(@PathVariable("id") Long id, Model model) {
+		User user = userService.findUser(id);
+
+		model.addAttribute("user", user);
+		return VIEW;
 	}
 
 	@RequiresPermissions("user:role:update")
@@ -143,5 +152,6 @@ public class UserController {
 	private static final String CREATE = "security/user/create";
 	private static final String CHANGE_PASSWORD = "security/user/changePassword";
 	private static final String LIST = "security/user/list";
+	private static final String VIEW = "security/user/view";
 	private static final String UPDATE = "security/user/update";
 }

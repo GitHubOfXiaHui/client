@@ -5,11 +5,7 @@
 	<div class="pageFormContent" layoutH="58">
 		<p>
 			<label>用户名：</label>
-			<input type="text" class="validate[required,maxSize[10]] required" name="username" size="20"/>
-		</p>
-		<p>
-			<label>昵称：</label>
-			<input type="text" class="validate[required,maxSize[10]] required" name="realname" size="20"/>
+			<input type="text" class="validate[required,maxSize[20]] required" name="username" size="20"/>
 		</p>
 		<p>
 			<label>密码：</label>
@@ -18,6 +14,30 @@
 		<p>
 			<label>确认密码：</label>
 			<input type="password" class="validate[required,equals[password]] required" name="confirm" size="20"/>
+		</p>
+		<p>
+			<label>昵称：</label>
+			<input type="text" class="validate[required,maxSize[20]] required" name="nickname" size="20"/>
+		</p>
+		<p>
+			<label>所在部门：</label>
+			<input type="text" class="validate[maxSize[20]]" name="department" size="20"/>
+		</p>
+		<p>
+			<label>职位：</label>
+			<input type="text" class="validate[maxSize[20]]" name="jobTitle" size="20"/>
+		</p>
+		<p>
+			<label>工号：</label>
+			<input type="text" class="validate[maxSize[20]]" name="jobNumber" size="20"/>
+		</p>
+		<p>
+			<label>电话：</label>
+			<input type="text" class="validate[maxSize[20]]" name="phone" size="20"/>
+		</p>
+		<p>
+			<label>邮箱：</label>
+			<input type="text" class="validate[maxSize[45]]" name="email" size="20"/>
 		</p>
 		<p>
 			<label>&nbsp;</label>

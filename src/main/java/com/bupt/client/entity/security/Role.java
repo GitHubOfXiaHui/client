@@ -12,12 +12,12 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import com.bupt.client.entity.IdLongEntity;
+import com.bupt.client.entity.BaseEntity;
 
 @Entity
 @Table(name = "sec_role")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE, region = "com.bupt.client.entity.security")
-public class Role extends IdLongEntity {
+public class Role extends BaseEntity {
 
 	private static final long serialVersionUID = -2617312579960892393L;
 

@@ -20,7 +20,7 @@ public class SegmenterUtilsTest {
 		String str = "第五期后勤服务座谈会";
 		List<Word> words = SegmenterUtils.seg(str);
 		for (Word word : words) {
-			System.out.println(word.getText());
+			System.out.println("*******" + word.getText() + "*******");
 		}
 	}
 	

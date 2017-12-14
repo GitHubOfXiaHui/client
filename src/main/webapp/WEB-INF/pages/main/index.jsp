@@ -83,7 +83,7 @@ $(function(){
            		<span class="tima">
 		    		<div>
 					    <span>
-					    	<span style="color: white; font-size: 10pt;">欢迎，${currentUser.realname}</span>
+					    	<span style="color: white; font-size: 10pt;">欢迎，${currentUser.nickname}</span>
 			               	<a href="${contextPath}/security/user/changePassword" target="dialog" mask="true" width="500" height="200" class="topLink02">修改密码</a>
 			               	<a href="${contextPath}/main/logout" class="topLink04">退出</a>
 			            </span>
@@ -142,7 +142,7 @@ $(function(){
 						<div class="right">
 							<p><fmt:formatDate value="<%=new Date() %>" pattern="yyyy-MM-dd EEEE"/></p>
 						</div>
-						<p><span>欢迎, ${currentUser.realname}.</span></p>
+						<p><span>欢迎, ${currentUser.nickname}.</span></p>
 					</div>
 					<div class="pageFormContent" layouth="80">
 						<fieldset>
@@ -152,8 +152,8 @@ $(function(){
 								<dd><span class="unit">${currentUser.username}</span></dd>
 							</dl>
 							<dl>
-								<dt>真名：</dt>
-								<dd><span class="unit">${currentUser.realname}</span></dd>
+								<dt>昵称：</dt>
+								<dd><span class="unit">${currentUser.nickname}</span></dd>
 							</dl>
 						</fieldset>
 					</div>

@@ -27,16 +27,17 @@ public class CipherUtilsTest {
 	//@Test
 	public void encryptTest() throws Exception {
 		Post post = new Post();
-		post.setContent("第五期后勤服务座谈会");
+		post.setTitle("忘拿坛服了");
+		post.setContent("昨晚有点忙，忘记去拿坛服了，怎么办？急，在线等");
 		String secret = cipher.encrypt(post, KeyEnum.POST);
 		System.out.println("*******" + secret + "*******");
 	}
 	
 	@Test
 	public void decryptTest() throws Exception {
-		String str = "Ubnrh68QFmhYLLDV9qtw9h9RqpdmLmW10k/BLzd81ny/thr9AC9X0E1ZRtp3wf77CvrS4zUAboQh3VSvbHSy/dpqokcu+NzGjIWR31M4Ove3R9hIU+rYk3ey3SnFVKOveq8+mi2w9tcO1HurK5Pc8A==";
+		String str = "ttiUxNfILdyVKcoWQEg/kqlm985Pf2sjVbGNvhhANClovMk7ImCe3xK4Zhaj4NRhwXcnn3h5q8BW31UWwSjIXO9lPRSnTzsXCn43NKWSN5xKlx0fLOY4FrN83j5dyQuqk1R+QKDRSzwHPB8VTEOSQx54A017Za5w5wVJxiP+AB09FhAjqiMx0Gt1oKDCTrBJYkJf5ZhrC0ilmNKHPZEGCQ==";
 		Post post = cipher.decrypt(Post.class, str, KeyEnum.POST);
-		System.out.println("*******" + post.getContent() + "*******");
+		System.out.println("*******" + post + "*******");
 	}
 
 }
