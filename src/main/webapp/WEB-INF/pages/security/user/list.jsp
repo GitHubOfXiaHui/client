@@ -53,6 +53,7 @@
 				<th>工号</th>
 				<th>电话</th>
 				<th>邮箱</th>
+				<th>角色</th>
 			</tr>
 		</thead>
 		<tbody>
